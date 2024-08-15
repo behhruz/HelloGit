@@ -1,9 +1,8 @@
 
-
 const Users = () => {
   return (
     <div>
-      Users Comp
+      Behruz
     </div>
   )
 }
