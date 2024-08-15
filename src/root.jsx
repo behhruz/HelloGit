@@ -13,6 +13,7 @@ import WoodenChairs from './pages/WoodrnChair';
 import RoomChairs from './pages/RoomChairs';
 import ParkChairs from './pages/ParkChairs';
 import Footer from './components/footer';
+import Users from './components/Users';
 
 const Root = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -34,6 +35,7 @@ const Root = () => {
         loggedInUser={loggedInUser}
         setLoggedInUser={setLoggedInUser}
       />
+      <Users/>
       {showLogin ? (
         <Login onLoginSuccess={handleLoginSuccess} />
       ) : (
