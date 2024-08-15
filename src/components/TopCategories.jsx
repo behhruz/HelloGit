@@ -5,7 +5,7 @@ const TopCategories = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5001/top_categories')
+        fetch('http://localhost:5000/top_categories')
             .then(res => res.json())
             .then(data => setData(data || []))
             .catch(error => console.error('Error fetching data:', error));

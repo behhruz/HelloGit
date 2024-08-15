@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Import Link for routing
 import img from '../../public/assets/check 1.png';
 import info from '../../public/assets/info.png';
 import logo from '../../public/assets/logo.png';
@@ -22,34 +22,10 @@ const HeartIcon = () => (
     </svg>
 );
 
-const Navbar = ({ setShowLogin, loggedInUser, setLoggedInUser }) => {
+const Navbar = () => {
     const [selectedOption, setSelectedOption] = useState('Eng');
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const navigate = useNavigate();
-const handleLoginClickk =()=>{
-    navigate('/');
-
-}
-    useEffect(() => {
-        // Load logged-in user from localStorage on component mount
-        const user = localStorage.getItem('loggedInUser');
-        if (user) {
-            setLoggedInUser(user); // Update the `loggedInUser` state
-        }
-    }, [setLoggedInUser]);
-
-    const handleLoginClick = () => {
-        const user = { name: 'Login none' }; // O'zgartiring, haqiqiy foydalanuvchi ma'lumotlarini kiriting
-        setLoggedInUser(user.name); // `props` orqali olingan `setLoggedInUser` ni chaqiramiz
-        localStorage.setItem('loggedInUser', user.name); // Foydalanuvchi ma'lumotlarini localStorage ga saqlaymiz
-        navigate('/comments');
-        setShowLogin(true);
-    };
-
-    const handleLogout = () => {
-        localStorage.removeItem('loggedInUser');
-        setLoggedInUser(null); // `props` orqali olingan `setLoggedInUser` ni chaqiramiz
-    };
+    const [selectedCategory, setSelectedCategory] = useState('All Categories');
 
     const handleChange = (event) => {
         setSelectedOption(event.target.value);
@@ -59,12 +35,17 @@ const handleLoginClickk =()=>{
         setDropdownOpen(!dropdownOpen);
     };
 
+    const handleCategoryChange = (category) => {
+        setSelectedCategory(category);
+        setDropdownOpen(false); // Close dropdown after selecting
+    };
+
     return (
         <div>
             {/* Top Bar */}
             <div className='flex bg-[#272343] pt-3 pb-3 justify-between px-32'>
                 <div className='flex items-center gap-2'>
-                    <img src={img} alt="Free shipping" />
+                    <img src={img} alt="" />
                     <p className='font-inter text-xs font-normal leading-4 text-[#F0F2F3] cursor-pointer'>
                         Free shipping on all orders over $50
                     </p>
@@ -83,7 +64,7 @@ const handleLoginClickk =()=>{
                         Faqs
                     </p>
                     <div className='flex items-center gap-1.5'>
-                        <img src={info} alt="Info" />
+                        <img src={info} alt="" />
                         <p className='font-inter text-xs font-normal leading-4 text-center text-[#f0f2f3] cursor-pointer'>
                             Need Help
                         </p>
@@ -95,7 +76,7 @@ const handleLoginClickk =()=>{
             <div className='flex items-center w-full bg-[#F0F2F3] py-5 px-36 justify-between'>
                 <div>
                     <Link to="/" className='flex items-center gap-2'>
-                        <img src={logo} alt="Logo" />
+                        <img src={logo} alt="" />
                         <p className='font-inter text-2xl font-medium leading-8 text-left text-[#272343]'>
                             Comforty
                         </p>
@@ -105,62 +86,91 @@ const handleLoginClickk =()=>{
                     <input
                         type="text"
                         placeholder="Search here..."
-                        className="w-[413px] pl-4 py-3 border border-transparent bg-white rounded-[5px] focus:outline-none focus:placeholder:text-[#9A9CAA] placeholder:text-[#9A9CAA] text-[#9A9CAA] font-inter text-base font-normal leading-6 text-left"
+                        className="w-[413px]  pl-4 py-3 border border-transparent bg-white rounded-[5px] focus:outline-none focus:placeholder:text-[#9A9CAA] placeholder:text-[#9A9CAA] text-[#9A9CAA] font-inter text-base font-normal leading-6 text-left"
                     />
                     <img
                         src={search}
-                        alt="Search"
+                        alt=""
                         className="absolute left-[91%] top-1/2 transform -translate-y-1/2"
                     />
                 </div>
                 <div className='flex items-center gap-3'>
                     <div className='flex items-center p-3 bg-white rounded-lg gap-2'>
-                        <button className='flex items-center gap-3' onClick={handleLoginClickk}>
-                            <img src={shop} alt="Cart" />
-                            <p className='font-bold text-cm leading-4 text-center text-[#4e4e4f]'>
-                                Cart
-                            </p>
-                        </button>
+                        <img src={shop} alt="" />
+                        <p className='font-inter text-xs font-medium leading-4 text-center text-[#272343]'>
+                            Cart
+                        </p>
                     </div>
                     <div className='flex items-center p-3 bg-white rounded-lg'>
                         <HeartIcon />
                     </div>
-                    <div className='flex items-center p-3 h-12 bg-white rounded-lg'>
-                        {!loggedInUser ? (
-                            <button type='button' onClick={handleLoginClick} >
-                                <img src={login} alt="Login" />
-                            </button>
-                        ) : (
-                            <div className='flex items-center gap-2'>
-                                <p className='flex items-center '>/ {loggedInUser}</p>
-                                <button onClick={handleLogout} className='bg-red-500 text-white px-3 py-1 rounded'>Logout</button>
-                            </div>
-                        )}
+                    <div className='flex items-center p-3 bg-white rounded-lg'>
+                        <img src={login} alt="" />
                     </div>
                 </div>
             </div>
 
             {/* Bottom Navbar */}
-            <div className='flex items-center py-[14px] px-[210px] bg-white justify-between overflow-x-auto'>
+            <div className='flex items-center py-[14px] px-[210px] bg-white justify-between'>
                 <div className='flex items-center gap-8'>
-                    <nav className='relative border p-3 rounded-xl'>
+                    <nav className='relative border py-2 px-9 rounded-xl'>
                         <div className='mr-auto'>
                             <button
                                 onClick={toggleDropdown}
                                 className='bg-transparent border-none text-[14px] cursor-pointer'
                             >
-                                &#9776; All Categories
+                                {selectedCategory}
                             </button>
                             {dropdownOpen && (
                                 <div className='absolute top-full left-0 bg-white shadow-lg p-2 rounded-md z-10'>
-                                    <Link to="#category1" className='block py-1 px-2 text-black no-underline hover:text-[#007bff]'>
-                                        Category 1
+                                    <Link
+                                        to="/wing-chair"
+                                        className='block py-1 px-2 text-black no-underline hover:text-[#007bff]'
+                                        onClick={() => handleCategoryChange('Wing Chair')}
+                                    >
+                                        Wing Chair
                                     </Link>
-                                    <Link to="#category2" className='block py-1 px-2 text-black no-underline hover:text-[#007bff]'>
-                                        Category 2
+                                    <Link
+                                        to="/wooden-chair"
+                                        className='block py-1 px-2 text-black no-underline hover:text-[#007bff]'
+                                        onClick={() => handleCategoryChange('Wooden Chair')}
+                                    >
+                                        Wooden Chair
                                     </Link>
-                                    <Link to="#category3" className='block py-1 px-2 text-black no-underline hover:text-[#007bff]'>
-                                        Category 3
+                                    <Link
+                                        to="/desk-chair"
+                                        className='block py-1 px-2 text-black no-underline hover:text-[#007bff]'
+                                        onClick={() => handleCategoryChange('Desk Chair')}
+                                    >
+                                        Desk Chair
+                                    </Link>
+                                    <Link
+                                        to="/park-chair"
+                                        className='block py-1 px-2 text-black no-underline hover:text-[#007bff]'
+                                        onClick={() => handleCategoryChange('Park Chair')}
+                                    >
+                                        Park Chair
+                                    </Link>
+                                    <Link
+                                        to="/room-chair"
+                                        className='block py-1 px-2 text-black no-underline hover:text-[#007bff]'
+                                        onClick={() => handleCategoryChange('Room Chair')}
+                                    >
+                                        Room Chair
+                                    </Link>
+                                    <Link
+                                        to="/scenic-chair"
+                                        className='block py-1 px-2 text-black no-underline hover:text-[#007bff]'
+                                        onClick={() => handleCategoryChange('Scenic Chair')}
+                                    >
+                                        Scenic Chair
+                                    </Link>
+                                    <Link
+                                        to="/beautiful-chair"
+                                        className='block py-1 px-2 text-black no-underline hover:text-[#007bff]'
+                                        onClick={() => handleCategoryChange('Beautiful Chair')}
+                                    >
+                                        Beautiful Chair
                                     </Link>
                                 </div>
                             )}
@@ -179,6 +189,8 @@ const handleLoginClickk =()=>{
                     <p className='font-inter text-sm font-medium leading-[15.4px] text-[#272343] text-left'>(808) 555-0111</p>
                 </div>
             </div>
+
+            <hr className='w-full shadow-[0px_1px_0px_0px_#E1E3E5]' />
         </div>
     );
 };

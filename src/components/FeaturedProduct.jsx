@@ -7,7 +7,7 @@ const FeaturedProducts = () => {
     const itemsPerPage = 4;
 
     useEffect(() => {
-        fetch('http://localhost:5001/Featured_Products')
+        fetch('http://localhost:5000/Featured%20Products')
             .then(res => res.json())
             .then(data => setData(data || []))
             .catch(error => console.error('Error fetching data:', error));

@@ -21,7 +21,7 @@ const Banner = () => {
     }, [slides.length]);
 
     return (
-        <div className="flex flex-col items-center m-7">
+        <div className="flex flex-col items-center">
             <div className="relative p-9 w-[90%] mx-auto bg-slate-200 rounded-2xl">
                 <div className="carousel w-[90%] justify-center">
                     <div className="w-[80%] flex justify-center mr-[-190px]">
@@ -31,9 +31,9 @@ const Banner = () => {
                                 className={`carousel-item w-full flex items-center ${index === currentIndex ? "block" : "hidden"
                                     }`}
                             >
-                                <div>
-                                    <p className="text-black">Welcome to Chairy</p>
+                                <div className="flex flex-col pl-10 gap-10">
                                     <div className="w-[631px] h-[225px] text-gray-900">
+                                        <p className="text-black text-lg leading-7">Welcome to Chairy</p>
                                         <p className="text-6xl font-bold leading-tight">
                                             Best Furniture Collection for your interior.
                                         </p>
@@ -52,9 +52,9 @@ const Banner = () => {
                         ))}
                     </div>
                 </div>
-                <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+                <div className="absolute left-2 right-2 top-1/2 flex -translate-y-1/2 transform justify-between">
                     <button
-                        className="h-11 w-11 flex items-center justify-center bg-slate-200 text-black text-2xl p-2 rounded-full  hover:bg-green-500 transition-all duration-150"
+                        className="h-11 w-11 flex items-center justify-center bg-slate-200 text-black text-2xl rounded-full  hover:bg-green-500 transition-all duration-150"
                         onClick={() =>
                             setCurrentIndex(
                                 (prevIndex) => (prevIndex - 1 + slides.length) % slides.length

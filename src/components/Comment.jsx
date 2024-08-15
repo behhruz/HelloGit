@@ -57,7 +57,7 @@ const Testimonials = ({ loggedInUser }) => {
   };
 
   return (
-    <div className="bg-gray-50 py-12">
+    <div className="bg-gray-50 py-12 mt-7">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className='flex items-center w-[1200px] justify-between mb-11'>
           <h2 className="text-3xl font-extrabold text-gray-900 mb-8">What Clients Say About Us</h2>
